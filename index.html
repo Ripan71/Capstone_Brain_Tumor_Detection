@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('background.jpg'); /* Background image URL */
+            background-image: url('Images/background.jpg'); /* Background image URL */
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -72,17 +72,25 @@
         <h1>Brain Tumor Detection</h1>
         <h2>Welcome to Brain Tumor Detection</h2>
         <p>Upload your MRI image and click "Scan" to get started.</p>
-        <input type="file" id="fileInput" accept=".jpg, .jpeg, .png">
-        <button class="upload-button" onclick="navigateToRandomPage()">Scan MRI</button>
+        <input type="file" id="fileInput" accept=".jpg, .jpeg, .png, .pdf">
+        <button class="upload-button" onclick="scanMRI()">Scan MRI</button>
         <div class="result" id="result"></div>
-        <div class="stage-details"></div>
+        <div class="stage-details" id="errorMessage" style="color: red;"></div>
     </div>
 
     <script>
-        function navigateToRandomPage() {
-            const pages = ['stage1.html', 'stage2.html', 'stage3.html','stage4.html'];
-            const randomPage = pages[Math.floor(Math.random() * pages.length)];
-            window.location.href = randomPage;
+        function scanMRI() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const pages = ['stage1.html', 'stage2.html', 'stage3.html', 'stage4.html'];
+                const randomPage = pages[Math.floor(Math.random() * pages.length)];
+                window.location.href = randomPage;
+            } else {
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.innerText = 'Please upload your Brain MRI report.';
+            }
         }
     </script>
 </body>
